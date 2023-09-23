@@ -27,8 +27,8 @@ exports.createCourse = async (req, res, next) => {
     return next(new ErrorHandler(error.message, 400));
   }
 }
-exports.getCourses = async (req, res) => {
-  const courses = await courseModel.find().select("-courseData.videoUrl");
+exports.getAllCourses = async (req, res) => {
+  const courses = await courseModel.find().sort({createdAt:-1}).select("-courseData.videoUrl");
   res.status(200).json({ success: true, courses });
 };
 exports.getSingleCourses = async (req, res) => {

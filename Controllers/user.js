@@ -197,3 +197,8 @@ exports.updateAvatar = async (req, res, next) => {
     }
 
 }
+
+exports.getAllUsers = async (req, res) => {
+    const users = await userModel.find().sort({createdAt:-1});
+    res.status(200).json({ success: true, users });
+};

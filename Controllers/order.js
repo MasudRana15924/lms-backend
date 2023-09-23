@@ -27,6 +27,7 @@ exports.createOrder = async (req, res, next) => {
         await notificationModel.create({
             user: user?._id,
             title: "New Purchase Order",
+            status:"Unread",
             message: `You have a new order of ${course.title} from ${user.firstname} ${user.lastname}`
         })
         if (order) {
@@ -48,3 +49,8 @@ exports.createOrder = async (req, res, next) => {
         return next(new ErrorHandler(error.message, 400));
     }
 }
+
+exports.getAllOrders = async (req, res) => {
+    const orders = await OrderModel.find().sort({createdAt:-1});
+    res.status(200).json({ success: true, orders });
+  };
