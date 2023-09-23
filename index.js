@@ -12,15 +12,14 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
-const corsOptions ={
-  origin:'http://localhost:3000', 
-  // origin:'https://m-pay.vercel.app', 
-  credentials:true,            //access-control-allow-credentials:true
-  optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
-// app.use(cors());
-
+// const corsOptions ={
+//   origin:'http://localhost:3000', 
+//   // origin:'https://m-pay.vercel.app', 
+//   credentials:true,            //access-control-allow-credentials:true
+//   optionSuccessStatus:200
+// }
+// app.use(cors(corsOptions));
+app.use(cors());
 const port = process.env.PORT || 5000;
 connectDatabase();
 cloudinary.config({

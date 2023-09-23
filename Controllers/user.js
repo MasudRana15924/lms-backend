@@ -62,13 +62,13 @@ exports.verifyEmail = async (req, res, next) => {
         if (newUser.activationCode !== activationCode) {
             return next(new ErrorHandler("Invalid OTP ", 400));
         }
-        const { name, email, password, } = newUser;
+        const { firstname,lastname, email, password, } = newUser;
         let user = await userModel.findOne({ email });
         if (user) {
             return next(new ErrorHandler("User already exists", 400));
         }
         const registerUser = await userModel.create({
-            name,
+            firstname,lastname,
             email,
             password,
         });
@@ -169,7 +169,7 @@ exports.updateAvatar = async (req, res, next) => {
             if(user?.avatar?.public_id){
                 await cloudinary.v2.uploader.destroy(user?.avatar?.public_id);
                 const myCloud=await cloudinary.v2.uploader.upload(avatar,{
-                    folter:"avatars",
+                    folder:"avatars",
                     width:150,
                 });
                 user.avatar={
@@ -178,7 +178,7 @@ exports.updateAvatar = async (req, res, next) => {
                 }
              }else{
                 const myCloud=await cloudinary.v2.uploader.upload(avatar,{
-                    folter:"avatars",
+                    folder:"avatars",
                     width:150,
                 });
                 user.avatar={

@@ -15,14 +15,15 @@ const courseSchema = new mongoose.Schema({
     type: String,
   },
   thumbnail: {
-    public_id: {
-      type: String,
-      //   required: true,
-    },
-    url: {
-      type: String,
-      //   required: true,
-    },
+    public_id:String,
+    url:String
+  },
+  demoUrl: {
+    type: String,
+  },
+  purchased: {
+    type: Number,
+    default:0,
   },
   reviews: [
     {
